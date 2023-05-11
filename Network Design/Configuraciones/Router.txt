@@ -1,0 +1,131 @@
+Router#show r
+Building configuration...
+
+Current configuration : 1953 bytes
+!
+version 12.2
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+service password-encryption
+!
+hostname Router
+!
+!
+!
+enable secret 5 $1$mERr$hx5rVt7rPNoS4wqbXKX7m0
+!
+!
+!
+ip dhcp pool PRIMARIA
+ network 172.16.0.0 255.255.255.0
+ default-router 172.16.0.254
+ip dhcp pool SECUNDARIA
+ network 172.16.1.0 255.255.255.128
+ default-router 172.16.1.126
+ip dhcp pool PREPARATORIA
+ network 172.16.1.128 255.255.255.192
+ default-router 172.16.1.190
+ip dhcp pool ENTRENADORES
+ network 172.16.1.192 255.255.255.192
+ default-router 172.16.1.254
+ip dhcp pool PRENSA
+ network 172.16.2.0 255.255.255.192
+ default-router 172.16.2.62
+ip dhcp pool JUECES
+ network 172.16.2.64 255.255.255.224
+ default-router 172.16.2.94
+ip dhcp pool ADMIN
+ network 172.16.2.96 255.255.255.224
+ default-router 172.16.2.126
+!
+!
+!
+no ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/0.1
+ encapsulation dot1Q 10
+ ip address 172.16.0.254 255.255.255.0
+!
+interface FastEthernet0/0.2
+ encapsulation dot1Q 20
+ ip address 172.16.1.126 255.255.255.128
+!
+interface FastEthernet0/0.3
+ encapsulation dot1Q 30
+ ip address 172.16.1.190 255.255.255.192
+!
+interface FastEthernet0/0.4
+ encapsulation dot1Q 40
+ ip address 172.16.1.254 255.255.255.192
+!
+interface FastEthernet0/0.5
+ encapsulation dot1Q 50
+ ip address 172.16.2.62 255.255.255.192
+!
+interface FastEthernet0/0.6
+ encapsulation dot1Q 60
+ ip address 172.16.2.94 255.255.255.224
+!
+interface FastEthernet0/0.7
+ encapsulation dot1Q 99
+ ip address 172.16.2.126 255.255.255.224
+!
+interface FastEthernet1/0
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+no cdp run
+!
+banner motd ^CSOLO ACCESO AUTORIZADO^C
+!
+!
+!
+!
+!
+line con 0
+ password 7 0822455D0A16
+ login
+!
+line aux 0
+!
+line vty 0 4
+ password 7 0822455D0A16
+ login
+line vty 5 15
+ password 7 0822455D0A16
+ login
+!
+!
+!
+end
